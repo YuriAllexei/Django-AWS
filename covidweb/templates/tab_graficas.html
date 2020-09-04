@@ -1,0 +1,59 @@
+ {% block tab_graficas %}
+<div x-data="{ openTab: 1 }" class="p-6">
+    <ul class="flex border-b">
+        <li @click="openTab = 1" :class="{ '-mb-px': openTab === 1 }" class="-mb-px mr-1">
+            <a :class="openTab === 1 ? 'border-l border-t border-r rounded-t text-blue-700' : 'text-blue-500 hover:text-blue-800'" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
+            PIB      
+        </a>
+        </li>
+        <li @click="openTab = 2" :class="{ '-mb-px': openTab === 2 }" class="mr-1">
+            <a :class="openTab === 2 ? 'border-l border-t border-r rounded-t text-blue-700' : 'text-blue-500 hover:text-blue-800'" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
+            Inflación
+        </a>
+        </li>
+        <li @click="openTab = 3" :class="{ '-mb-px': openTab === 3 }" class="mr-1">
+            <a :class="openTab === 3 ? 'border-l border-t border-r rounded-t text-blue-700' : 'text-blue-500 hover:text-blue-800'" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
+            Tasas de interés
+        </a>
+        </li>
+        <li @click="openTab = 4" :class="{ '-mb-px': openTab === 4 }" class="mr-1">
+            <a :class="openTab === 4 ? 'border-l border-t border-r rounded-t text-blue-700' : 'text-blue-500 hover:text-blue-800'" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
+            Tipos de cambio
+        </a>
+        </li>
+    </ul>
+    <div class="w-full pt-4">
+        <div class="columns is-centered" id="grafica_pib" x-show="openTab === 1"></div>
+        <div class="fl w-100 h-100-m" id="grafica_inflacion" x-show="openTab === 2"></div>
+        <div class="fl w-100 h-100-m" id="grafica_tasas" x-show="openTab === 3"></div>
+        <div class="fl w-100 h-100-m" id="grafica_cambio" x-show="openTab === 4"></div>
+    </div>
+    <script type="text/javascript">
+        var grafica = JSON.parse("{{pib|escapejs}}");
+        Plotly.plot("grafica_pib", grafica, {}, {
+            displayModeBar: false
+        });
+    </script>
+    <script type="text/javascript">
+        var grafica = JSON.parse("{{inflacion|escapejs}}");
+        Plotly.plot("grafica_inflacion", grafica, {}, {
+            displayModeBar: false
+        });
+    </script>
+    <script type="text/javascript">
+        var grafica = JSON.parse("{{tasas_interes|escapejs}}");
+        Plotly.plot("grafica_tasas", grafica, {}, {
+            displayModeBar: false
+        });
+    </script>
+    <script type="text/javascript">
+        var grafica = JSON.parse("{{tipo_cambio|escapejs}}");
+        Plotly.plot("grafica_cambio", grafica, {}, {
+            displayModeBar: false
+        });
+    </script>
+</div>
+
+<!-- Alpine.js -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+{% endblock %}
