@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+{% extends 'base.html' %}
+
+<head>
+    {% block head %}
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
+    <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet"> {% endblock %}
+</head>
+
+{% block content %}
+
+<body>
+    {% include "nav.html" %} {% block nav %} {% endblock %}
+    <section>
+        {% include "header.html" %} {% block header %} {% endblock %}
+    </section>
+    {% endblock %}

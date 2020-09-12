@@ -1,12 +1,20 @@
 from django.shortcuts import render
 from django.http import  HttpResponse
+from .functions import *
 # Create your views here.
 def home_view(request, *args,**kwargs):
-	print(request.user)
-	return render(request,"grafica_pib.html",{})
+	context={'pib':graficar_pib(),
+				'inflacion':graficar_inflacion(),
+				'tasas_interes':graficar_tasas_interes(),
+				'tipo_cambio':graficar_tipo_cambio()}
+	return render(request,"graficas.html",context)
+	#print(request.user)
+	#return render(request,"grafica_pib.html",{})
 
 def grafica_view(request,*args,**kwargs):
-	return render(request,"grafica_pib.html")
+	grafica_pib = graficar_pib()
+	context = {'grafica':grafica_pib}
+	return render(request,"graficas.html",context)
 
 def priviet_view(request,*args,**kwargs):
 	print(request.user,"is being a kuk")
